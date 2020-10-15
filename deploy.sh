@@ -1,8 +1,8 @@
 
-heroku create $YOUR_HEROKU_PROJECT_NAME
+# heroku login -i
+# heroku container:login
 
-heroku container:push web --app $YOUR_HEROKU_PROJECT_NAME
-
-heroku container:release web --app $YOUR_HEROKU_PROJECT_NAME
-
-heroku logs --app $YOUR_HEROKU_PROJECT_NAME --tail
+# heroku create personal-mini-cloud
+heroku container:push web --app personal-mini-cloud
+heroku container:release web --app personal-mini-cloud
+heroku logs --app personal-mini-cloud --tail
