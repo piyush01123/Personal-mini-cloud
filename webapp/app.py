@@ -8,12 +8,12 @@ app = Flask("Flask Upload Server")
 
 @app.route('/', methods=["GET", "POST"])
 def home():
-    host=urlparse(request.base_url)
+    app.config.host_url = urlparse(request.base_url).geturl()
     if request.method=="GET":
         return docu()
     file = request.files["file"]
     file.save(os.path.join("cdn", file.filename))
-    return "wget {}/cdn/{}\n\n".format(host.geturl(), pathname2url(file.filename))
+    return "wget {}/cdn/{}\n\n".format(app.config.host_url, pathname2url(file.filename))
 
 @app.route('/cdn/<path:codeword>')
 def download_file(codeword):
@@ -22,17 +22,14 @@ def download_file(codeword):
 
 @app.route('/all')
 def get_list():
-    host=urlparse(request.base_url)
     text = ["<b><u>All uploads</u></b>"]
     for file in os.listdir("cdn"):
-        url = "{}/cdn/{}".format(host.geturl(), pathname2url(file))
+        url = "{}cdn/{}".format(app.config.host_url, pathname2url(file))
         text.append("<a href='{0}'</a>{0}".format(url))
     return "<br>".join(text)
 
 
 def docu():
-    host=urlparse(request.base_url)
-    print(dir(host), host.geturl())
     return """<span style="white-space: pre-line" id="myspan">
 <h1>Welcome to Personal Mini Cloud.</h1>
 Usage:
@@ -68,7 +65,7 @@ NEW: You can also upload from browser now. \n
       });
 });
 </script>
-    """ % urlparse(request.base_url).geturl()
+    """ % app.config.host_url
 
 
 if __name__=="__main__":
