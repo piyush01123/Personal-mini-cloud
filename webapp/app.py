@@ -1,5 +1,5 @@
 
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, redirect
 from urllib.request import pathname2url, url2pathname
 import os, glob, sys
 from urllib.parse import urlparse
@@ -28,6 +28,10 @@ def get_list():
         text.append("<a href='{0}'</a>{0}".format(url))
     return "<br>".join(text)
 
+
+@app.errorhandler(404) 
+def invalid_route(e): 
+    return redirect("/")
 
 def docu():
     return """<span style="white-space: pre-line" id="myspan">
