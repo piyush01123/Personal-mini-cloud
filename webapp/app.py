@@ -4,7 +4,7 @@ from urllib.request import pathname2url, url2pathname
 import os, glob, sys
 from urllib.parse import urlparse
 
-app = Flask("Flask Upload Server")
+app = Flask("Personal mini cloud")
 
 @app.route('/', methods=["GET", "POST"])
 def home():
@@ -37,7 +37,7 @@ curl -i -X POST -F file=@FILE_PATH  %s \n
 Replace FILE_PATH with absolute path of the file to be uploaded to the cloud. \n
 <a id="allfileslink">List all uploads</a> \n
 Star/fork/improve my source code:
-<a href='https://github.com/piyush-kgp/File-upload-server'>https://github.com/piyush-kgp/File-upload-server</a> \n
+<a href='https://github.com/piyush-kgp/Personal-mini-cloud'>https://github.com/piyush-kgp/Personal-mini-cloud</a> \n
 NEW: You can also upload from browser now. \n
 <input type="file" id="uploader"></input>
 </span>
